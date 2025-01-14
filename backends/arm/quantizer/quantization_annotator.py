@@ -171,6 +171,7 @@ _one_to_one_shared_input_qspec = [
     torch.ops.aten.chunk.default,
     torch.ops.aten.contiguous.default,
     torch.ops.aten.upsample_nearest2d.vec,
+    torch.ops.aten.pad.default,
 ]
 
 # Operators that can inherit the quantization specs from its parent node
@@ -215,6 +216,7 @@ def get_quant_properties(  # noqa: C901
                 torch.ops.aten.conv1d.default,
                 torch.ops.aten.conv2d.default,
                 torch.ops.aten.linear.default,
+                torch.ops.aten.conv2d.padding,
             ],
             [torch.ops.aten.relu.default, torch.ops.aten.hardtanh.default],
         ],
@@ -224,6 +226,7 @@ def get_quant_properties(  # noqa: C901
             torch.ops.aten.conv1d.default,
             torch.ops.aten.conv2d.default,
             torch.ops.aten.linear.default,
+            torch.ops.aten.conv2d.padding,
         ):
             quant_properties.quant_inputs = [
                 _QuantProperty(0, input_act_qspec),
@@ -236,6 +239,7 @@ def get_quant_properties(  # noqa: C901
         torch.ops.aten.conv1d.default,
         torch.ops.aten.conv2d.default,
         torch.ops.aten.linear.default,
+        torch.ops.aten.conv2d.padding,
     ):
         quant_properties.quant_inputs = [
             _QuantProperty(0, input_act_qspec),
